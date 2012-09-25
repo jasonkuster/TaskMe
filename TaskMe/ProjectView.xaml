@@ -1,0 +1,119 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="TaskMe.ProjectView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressBar" IsIndeterminate="true" IsVisible="False" Text="Working..." />
+    </shell:SystemTray.ProgressIndicator>
+    
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Pivot Control-->
+        <controls:Panorama x:Name="ProjectPanorama" Title="{Binding name}" SelectionChanged="ProjectPanorama_SelectionChanged">
+            <!--Pivot item one-->
+            <controls:PanoramaItem x:Name="DetailItem" Header="Details">
+                <ScrollViewer Margin="{StaticResource PhoneMargin}">
+                    <StackPanel Height="583" Width="432">
+                        <StackPanel Height="73" Margin="0,0,0,12" x:Name="DuePanel">
+                            <TextBlock x:Name="DueDateTextBlock" TextWrapping="Wrap" Text="Due Date/Time" FontSize="{StaticResource PhoneFontSizeSmall}">
+        					<TextBlock.Foreground>
+        						<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
+        					</TextBlock.Foreground>
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding dueDate}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                        </StackPanel>
+                        <TextBlock x:Name="DescBlock" TextWrapping="Wrap" Text="Description" FontSize="{StaticResource PhoneFontSizeSmall}">
+                        	<TextBlock.Foreground>
+                        		<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
+                        	</TextBlock.Foreground>
+                        </TextBlock>
+                        <TextBlock x:Name="DescFullBlock" TextWrapping="Wrap" Text="{Binding description}" FontSize="{StaticResource PhoneFontSizeLarge}" Margin="0,0,0,12"/>
+                        <StackPanel Height="73">
+                            <TextBlock x:Name="StatusTextBlock" TextWrapping="Wrap" Text="Status" FontSize="{StaticResource PhoneFontSizeSmall}">
+        					<TextBlock.Foreground>
+        						<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
+        					</TextBlock.Foreground>
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding status}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </controls:PanoramaItem>
+
+            <!--Pivot item two-->
+            <controls:PanoramaItem x:Name="TaskItem" Header="Incomplete">
+                <Canvas>
+                    <ListBox x:Name="TaskListBox" Height="370" Width="432" Margin="{StaticResource PhoneMargin}" SelectionChanged="TaskListBox_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,17" Width="432" Height="78">
+                                    <TextBlock Text="{Binding name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                    <TextBlock Text="{Binding description}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Canvas>
+            </controls:PanoramaItem>
+            <controls:PanoramaItem x:Name="DoneItems" Header="Complete">
+                <Canvas>
+                    <ListBox x:Name="DoneBox" Height="370" Width="432" Margin="{StaticResource PhoneMargin}" SelectionChanged="DoneBox_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,17" Width="432" Height="78">
+                                    <TextBlock Text="{Binding name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                    <TextBlock Text="{Binding description}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Canvas>
+            </controls:PanoramaItem>
+        </controls:Panorama>
+    </Grid>
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="EditAddButton" IconUri="/icons/appbar.edit.rest.png" Text="edit" Click="EditAddButton_Click"/>
+            <shell:ApplicationBarIconButton x:Name="CompleteButton" IconUri="/icons/appbar.check.rest.png" Text="complete" Click="CompleteButton_Click"/>
+            <shell:ApplicationBarIconButton x:Name="DeleteButton" IconUri="/icons/appbar.delete.rest.png" Text="delete" Click="DeleteButton_Click"/>
+            <!--<shell:ApplicationBarIconButton x:Name="RefreshButton" IconUri="/icons/appbar.refresh.rest.png" Text="refresh" Click="RefreshButton_Click"/>-->
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+    
+</phone:PhoneApplicationPage>
