@@ -96,14 +96,14 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
         	<ScrollViewer Margin="{StaticResource PhoneMargin}">
-        		<StackPanel x:Name="TaskPanel" Width="432" Height="404">
+        		<StackPanel x:Name="TaskPanel" Width="432">
         			<StackPanel x:Name="NamePanel" Orientation="Vertical" Margin="-12,0">
         				<TextBlock x:Name="NameBlock" TextWrapping="Wrap" Text="Name" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="12,0,12,-6">
         					<TextBlock.Foreground>
         						<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
         					</TextBlock.Foreground>
         				</TextBlock>
-        				<TextBox x:Name="NameTextBox" TextWrapping="NoWrap" Text="{Binding name}"/>
+        				<TextBox x:Name="NameTextBox" TextWrapping="NoWrap" InputScope="Text" Text="{Binding name}"/>
         			</StackPanel>
         			<StackPanel x:Name="DescPanel" Orientation="Vertical" Margin="-12,0">
         				<TextBlock x:Name="DescBlock" TextWrapping="Wrap" Text="Description/Notes" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="12,0,12,-6">
@@ -111,7 +111,7 @@
         						<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
         					</TextBlock.Foreground>
         				</TextBlock>
-        				<TextBox x:Name="DescTextBox" TextWrapping="NoWrap" Text="{Binding description}"/>
+                        <TextBox x:Name="DescTextBox" TextWrapping="NoWrap" InputScope="Text" Text="{Binding description}"/>
         			</StackPanel>
         			<toolkit:ToggleSwitch x:Name="DueSwitch" Header="Set Due Time/Date" Checked="DueSwitch_Checked" Unchecked="DueSwitch_Unchecked"/>
         			<Canvas x:Name="DueCanvas" Height="100" RenderTransformOrigin="0.5,0.5" Margin="-12,0">

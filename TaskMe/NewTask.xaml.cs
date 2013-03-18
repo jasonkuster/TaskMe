@@ -185,16 +185,7 @@ namespace TaskMe
 
             ((ApplicationBarIconButton)ApplicationBar.Buttons[0]).IsEnabled = false;
             ProgressBar.IsVisible = true;
-            NameTextBox.IsEnabled = false;
-            DescTextBox.IsEnabled = false;
-            DueSwitch.IsEnabled = false;
-            DueDatePicker.IsEnabled = false;
-            DueTimePicker.IsEnabled = false;
-            RemindSwitch.IsEnabled = false;
-            ReminderDatePicker.IsEnabled = false;
-            ReminderTimePicker.IsEnabled = false;
-            AssignToSwitch.IsEnabled = false;
-            AssignPicker.IsEnabled = false;
+            LockUI();
 
             if (selectedKey != -1 && selectedProject == -1) //Editing a standalone task
                 EditTask();
@@ -218,7 +209,7 @@ namespace TaskMe
             {
                 var dueDate = (DateTime)DueDatePicker.Value;
                 var dueTime = (DateTime)DueTimePicker.Value;
-                newTask.dueDate = new DateTime(dueDate.Year, dueDate.Month, dueDate.Day, dueDate.Hour, dueDate.Minute, dueDate.Second);
+                newTask.dueDate = new DateTime(dueDate.Year, dueDate.Month, dueDate.Day, dueTime.Hour, dueTime.Minute, dueTime.Second);
             }
             else
                 newTask.dueDate = DateTime.MinValue;
@@ -263,7 +254,7 @@ namespace TaskMe
             {
                 var dueDate = (DateTime)DueDatePicker.Value;
                 var dueTime = (DateTime)DueTimePicker.Value;
-                ((ObservableCollection<MyTask>)settings["TaskList"])[selectedKey].dueDate = new DateTime(dueDate.Year, dueDate.Month, dueDate.Day, dueDate.Hour, dueDate.Minute, dueDate.Second);
+                ((ObservableCollection<MyTask>)settings["TaskList"])[selectedKey].dueDate = new DateTime(dueDate.Year, dueDate.Month, dueDate.Day, dueTime.Hour, dueTime.Minute, dueTime.Second);
             }
             else
                 ((ObservableCollection<MyTask>)settings["TaskList"])[selectedKey].dueDate = DateTime.MinValue;
@@ -309,7 +300,7 @@ namespace TaskMe
             {
                 var dueDate = (DateTime)DueDatePicker.Value;
                 var dueTime = (DateTime)DueTimePicker.Value;
-                newTask.dueDate = new DateTime(dueDate.Year, dueDate.Month, dueDate.Day, dueDate.Hour, dueDate.Minute, dueDate.Second);
+                newTask.dueDate = new DateTime(dueDate.Year, dueDate.Month, dueDate.Day, dueTime.Hour, dueTime.Minute, dueTime.Second);
             }
             else
                 newTask.dueDate = DateTime.MinValue;
@@ -417,16 +408,7 @@ namespace TaskMe
                     delegate
                     {
                         ProgressBar.IsVisible = false;
-                        NameTextBox.IsEnabled = true;
-                        DescTextBox.IsEnabled = true;
-                        DueSwitch.IsEnabled = true;
-                        DueDatePicker.IsEnabled = true;
-                        DueTimePicker.IsEnabled = true;
-                        RemindSwitch.IsEnabled = true;
-                        ReminderDatePicker.IsEnabled = true;
-                        ReminderTimePicker.IsEnabled = true;
-                        AssignToSwitch.IsEnabled = true;
-                        AssignPicker.IsEnabled = true;
+                        UnlockUI();
                     });
                 this.DisplayMessage("Task was unable to be assigned. Check your wifi/cellular connection.", "Error");
             }
@@ -443,16 +425,7 @@ namespace TaskMe
                     delegate
                     {
                         ProgressBar.IsVisible = false;
-                        NameTextBox.IsEnabled = true;
-                        DescTextBox.IsEnabled = true;
-                        DueSwitch.IsEnabled = true;
-                        DueDatePicker.IsEnabled = true;
-                        DueTimePicker.IsEnabled = true;
-                        RemindSwitch.IsEnabled = true;
-                        ReminderDatePicker.IsEnabled = true;
-                        ReminderTimePicker.IsEnabled = true;
-                        AssignToSwitch.IsEnabled = true;
-                        AssignPicker.IsEnabled = true;
+                        UnlockUI();
                     });
                 this.DisplayMessage("Task was unable to be assigned. Check your wifi/cellular connection.", "Error");
             }
@@ -552,16 +525,7 @@ namespace TaskMe
             else
             {
                 ProgressBar.IsVisible = false;
-                NameTextBox.IsEnabled = true;
-                DescTextBox.IsEnabled = true;
-                DueSwitch.IsEnabled = true;
-                DueDatePicker.IsEnabled = true;
-                DueTimePicker.IsEnabled = true;
-                RemindSwitch.IsEnabled = true;
-                ReminderDatePicker.IsEnabled = true;
-                ReminderTimePicker.IsEnabled = true;
-                AssignToSwitch.IsEnabled = true;
-                AssignPicker.IsEnabled = true;
+                UnlockUI();
                 this.DisplayMessage("Task was unable to be edited. Check your wifi/cellular connection.", "Error");
             }
         }
@@ -643,6 +607,34 @@ namespace TaskMe
             {
                 TaskPanel.Height -= assignHeight;
             }
+        }
+
+        private void LockUI()
+        {
+            NameTextBox.IsEnabled = false;
+            DescTextBox.IsEnabled = false;
+            DueSwitch.IsEnabled = false;
+            DueDatePicker.IsEnabled = false;
+            DueTimePicker.IsEnabled = false;
+            RemindSwitch.IsEnabled = false;
+            ReminderDatePicker.IsEnabled = false;
+            ReminderTimePicker.IsEnabled = false;
+            AssignToSwitch.IsEnabled = false;
+            AssignPicker.IsEnabled = false;
+        }
+
+        private void UnlockUI()
+        {
+            NameTextBox.IsEnabled = true;
+            DescTextBox.IsEnabled = true;
+            DueSwitch.IsEnabled = true;
+            DueDatePicker.IsEnabled = true;
+            DueTimePicker.IsEnabled = true;
+            RemindSwitch.IsEnabled = true;
+            ReminderDatePicker.IsEnabled = true;
+            ReminderTimePicker.IsEnabled = true;
+            AssignToSwitch.IsEnabled = true;
+            AssignPicker.IsEnabled = true;
         }
     }
 }

@@ -259,13 +259,22 @@ namespace TaskMe
 
         private void SendProject(Endpoint from, string recipients)
         {
-            byte[] message = editProj.Serialize();
-            RelayService.SendMessageAsync(
-                HawaiiClient.HawaiiApplicationId,
-                from,
-                recipients,
-                message,
-                this.OnCompleteSendMessage);
+            if (!String.IsNullOrEmpty(recipients))
+            {
+                byte[] message = editProj.Serialize();
+                RelayService.SendMessageAsync(
+                    HawaiiClient.HawaiiApplicationId,
+                    from,
+                    recipients,
+                    message,
+                    this.OnCompleteSendMessage);
+            }
+            else
+            {
+                MessagingResult ret = new MessagingResult();
+                ret.Status = Status.Success;
+                OnCompleteSendMessage(ret);
+            }
         }
 
         private void OnCompleteSendMessage(MessagingResult result)

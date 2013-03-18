@@ -58,7 +58,7 @@
         	<StackPanel Margin="{StaticResource PhoneMargin}">
         		<TextBlock x:Name="DescTextBox" TextWrapping="Wrap"><Run Text="Welcome to TaskMe! This app is a great way to manage tasks, both for yourself and for groups of people. Create projects, add people, and keep track of how things are going."/><LineBreak/><Run/><LineBreak/><Run Text="Let's get started. In order to use the group features of the app, you will need to create an account. Please enter a username. If you choose not to, you can reach this screen again from the settings section of the app."/></TextBlock>
         		<TextBlock x:Name="UsernameTextBlock" TextWrapping="Wrap" Margin="0,15,0,0" Text="Username"/>
-        		<TextBox x:Name="UsernameTextBox" TextWrapping="Wrap"/>
+        		<TextBox x:Name="UsernameTextBox" TextWrapping="Wrap" InputScope="Text"/>
         	</StackPanel></Grid>
     </Grid>
  

@@ -58,12 +58,12 @@
         		<StackPanel Height="583" Width="432">
         			<StackPanel Height="100">
         				<TextBlock TextWrapping="Wrap" Text="Name"/>
-        				<TextBox x:Name="NameBox" Text="{Binding Name}" TextWrapping="Wrap"/>
+                        <TextBox x:Name="NameBox" Text="{Binding Name}" InputScope="Text" TextWrapping="Wrap"/>
                     </StackPanel>
                     <StackPanel Height="100">
                         <StackPanel Height="100">
                             <TextBlock TextWrapping="Wrap" Text="Username"/>
-                            <TextBox x:Name="UsernameBox" Text="{Binding Username}" TextWrapping="Wrap"/>
+                            <TextBox x:Name="UsernameBox" Text="{Binding Username}" InputScope="Text" TextWrapping="Wrap"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>

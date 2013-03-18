@@ -26,6 +26,22 @@ namespace TaskMe
         public string project { get; set; }
         public Person assignedTo { get; set; }
 
+        public string color
+        {
+            get
+            {
+                if (!isComplete && DateTime.Compare(dueDate, DateTime.Now) <= 0)
+                {
+                    return "red";
+                }
+                else
+                {
+                    string col = Application.Current.Resources["PhoneForegroundColor"].ToString();
+                    return col;
+                }
+            }
+        }
+
         public byte[] Serialize()
         {
             if (!isComplete)

@@ -58,11 +58,11 @@
         		<StackPanel Height="583" Width="432">
         			<StackPanel Height="100">
         				<TextBlock TextWrapping="Wrap" Text="Name" x:Name="NameTextBlock"/>
-        				<TextBox TextWrapping="NoWrap" x:Name="NameTextBox" Text="{Binding name}"/>
+                        <TextBox TextWrapping="NoWrap" x:Name="NameTextBox" InputScope="Text" Text="{Binding name}"/>
         			</StackPanel>
         			<StackPanel Height="100">
-        				<TextBlock TextWrapping="Wrap" x:Name="DescTextBlock" Text="Description"/>
-        				<TextBox TextWrapping="NoWrap" x:Name="DescTextBox" Text="{Binding description}"/>
+        				<TextBlock TextWrapping="Wrap" x:Name="DescText" Text="Description"/>
+                        <TextBox TextWrapping="NoWrap" x:Name="DescTextBox" InputScope="Text" Text="{Binding description}"/>
         			</StackPanel>
         			<toolkit:ToggleSwitch Name="DueSwitch" Header="Set Due Time/Date" Checked="DueSwitch_Checked" Unchecked="DueSwitch_Unchecked"/>
         			<Canvas x:Name="DueCanvas" Height="100" Margin="-12,-12,-12,12" RenderTransformOrigin="0.5,0.5" >
